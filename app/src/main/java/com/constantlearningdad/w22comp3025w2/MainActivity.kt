@@ -2,7 +2,11 @@ package com.constantlearningdad.w22comp3025w2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import androidx.core.view.isVisible
 import com.constantlearningdad.w22comp3025w2.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     //in Java private ActivityMainBinding binding;
@@ -13,5 +17,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.toastButton.setOnClickListener {
+            Toast.makeText(this,"This is a Toast", Toast.LENGTH_LONG).show()
+        }
+
+        binding.snackBarButton.setOnClickListener {
+            Snackbar.make(binding.layout,"Snackbar message",Snackbar.LENGTH_LONG).show()
+        }
+
+        binding.snackBarWithActionButton.setOnClickListener {
+            val snackbar = Snackbar.make(binding.layout,"Should we toggle the image?", Snackbar.LENGTH_INDEFINITE)
+            snackbar.setAction("Click Here", View.OnClickListener {
+                binding.imageView.isVisible = !binding.imageView.isVisible
+            })
+            snackbar.show()
+        }
     }
 }
